@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subir Archivo CSV</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        .upload-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        .file-upload {
+            border: 2px dashed #dee2e6;
+            border-radius: 5px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        .file-upload:hover {
+            border-color: #0d6efd;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container">
+        <div class="upload-container bg-white">
+            <h1 class="text-center mb-4">Subir Archivo CSV</h1>
+            
+            <form action="/" method="post" enctype="multipart/form-data" class="mb-4">
+                <div class="file-upload">
+                    <input type="file" name="file" accept=".csv" class="form-control" id="fileInput">
+                    <label for="fileInput" class="form-label mt-2">Selecciona un archivo CSV</label>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-lg">Subir Archivo</button>
+                </div>
+            </form>
+
+            {% if resumen %}
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="h4 mb-0">Resumen del archivo</h2>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <strong>Filas:</strong> {{ resumen.filas }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Columnas:</strong> {{ resumen.columnas }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Nombres de columnas:</strong>
+                            <ul class="list-group list-group-flush mt-2">
+                                {% for columna in resumen.nombres_columnas %}
+                                    <li class="list-group-item">{{ columna }}</li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
